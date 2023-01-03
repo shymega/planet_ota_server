@@ -4,3 +4,6 @@ spring.datasource.password=enter-password-here
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 github.webhooks.secrets.codid=enter-secret-here
+
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
