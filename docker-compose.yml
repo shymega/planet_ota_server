@@ -9,7 +9,7 @@ services:
     hostname: "planet_ota_service_db"
     container_name: "planet_ota_service_db"
     networks:
-      - inter-planet_ota-network
+      - isolated-planet_ota-network
     volumes:
       - "planet_ota_service_db_data:/var/lib/postgresql/data"
     environment:
@@ -21,7 +21,7 @@ services:
     hostname: "planet_ota_service"
     container_name: "planet_ota_service"
     networks:
-      - inter-planet_ota-network
+      - isolated-planet_ota-network
     ports:
       - "8080:8080"
 
