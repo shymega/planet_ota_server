@@ -1,21 +1,27 @@
 version: "3"
+networks:
+    isolated-planet_ota-network: {}
 volumes:
-  postgresql_planet_ota_data:
+  planet_ota_service_db_data:
 services:
-  postgresql_planet_ota:
+  planet_ota_service_db:
     image: "docker.io/postgres:alpine"
-    hostname: "postgres_planet_ota"
-    container_name: "postgres_planeta_ota"
+    hostname: "planet_ota_service_db"
+    container_name: "planet_ota_service_db"
+    networks:
+      - inter-planet_ota-network
     volumes:
-      - "postgresql_planet_ota_data:/var/lib/postgresql/data"
+      - "planet_ota_service_db_data:/var/lib/postgresql/data"
     environment:
-      - "POSTGRES_USER=planet_ota_service"
-      - "POSTGRES_PASSWORD=password123"
-      - "POSTGRES_DB=planet_ota_service"
+      - "POSTGRES_USER=${POSTGRES_USER:-planet_ota_service}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-enter-password-here}"
+      - "POSTGRES_DB=${POSTGRES_DB:-planet_ota_service}"
   planet_ota_service:
     build: "."
     hostname: "planet_ota_service"
     container_name: "planet_ota_service"
+    networks:
+      - inter-planet_ota-network
     ports:
       - "8080:8080"
 
